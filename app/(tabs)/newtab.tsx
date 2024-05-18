@@ -7,20 +7,24 @@ import { ThemedView } from '@/components/ThemedView';
 import { useEffect, useState } from 'react';
 import { Alarm } from '@/components/Alarm';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { Medicine } from '@/constants/Models';
 
 export default function HomeScreen() {
     const [medicines, setMedicines] = useState<Medicine []>([]);
     useEffect(() => {
       async function getMedicine(){
-        //await AsyncStorage.setItem('medicine', JSON.stringify([{'name': 'Paracetamol','enabled': true}, {'name': 'Omeprazol','enabled': false}]));
+        //create two dummy records
+        //await AsyncStorage.setItem('medicine', JSON.stringify([{"name": "Paracetamol", "enabled": true,"interval": 8,"dose": 1.0,"schedule": ["8:00", "16:00", "20:00"]}, {"name": "Omeprazol", "enabled": false,"interval": 12,"dose": 1.0,"schedule": ["8:00", "16:00"]}]));
         
         const value = await AsyncStorage.getItem('medicine');
 
         if(value === null){
             await AsyncStorage.setItem('medicine', JSON.stringify([]));
             setMedicines([]);
-        } else setMedicines(JSON.parse(value));
+        } else {
+            setMedicines(JSON.parse(value));
+        }
       }
   
       getMedicine();
