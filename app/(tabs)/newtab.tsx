@@ -1,12 +1,31 @@
-import { useState } from 'react'
-import { View, Switch, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 import { Button, ButtonGroup, withTheme, Text } from '@rneui/themed';
+
+import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { useEffect, useState } from 'react';
+import { Alarm } from '@/components/Alarm';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen() {
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const [medicines, setMedicines] = useState([{}]);
+    useEffect(() => {
+      async function getMedicine(){
+        //await AsyncStorage.setItem('medicine', JSON.stringify([{'name': 'Paracetamol','enabled': true}, {'name': 'Omeprazol','enabled': false}]));
+        
+        const value = await AsyncStorage.getItem('medicine');
+
+        if(value === null){
+            await AsyncStorage.setItem('medicine', JSON.stringify([]));
+            setMedicines([]);
+        }
+
+        setMedicines(JSON.parse(value));
+      }
+  
+      getMedicine();
+    }, []);
 
     return (
         <View
@@ -29,21 +48,12 @@ export default function HomeScreen() {
                 // color="#8DFF8A"
                 accessibilityLabel="Click to add new medicine to your alarms."
             />
-            <View
-                style={styles.medicinesContainer}>
-                <ThemedView style={styles.medicinesAlarm}>
-                    <ThemedText type="subtitle">Medicine Name</ThemedText>
-                    <ThemedText>Frecuencia </ThemedText>
-                    <Switch
-                        trackColor={{ false: '#767577', true: '#81b0ff' }}
-                        thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                        ios_backgroundColor="#3e3e3e"
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-                </ThemedView>
+            <View style={styles.medicinesContainer}>
+                { medicines.map((item, index) => (
+                    <Alarm key={index} data={item}/>
+                ))}
             </View>
-        </View >
+        </View>
     );
 }
 
@@ -66,8 +76,5 @@ const styles = StyleSheet.create({
     },
     medicinesContainer: {
         padding: 10,
-    },
-    medicinesAlarm: {
-        backgroundColor: '#BBBBBB',
     }
 });
