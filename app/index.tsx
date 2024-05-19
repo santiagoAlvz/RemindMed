@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
-import { View, Switch, StyleSheet, ScrollView } from 'react-native';
-import { Button } from '@rneui/themed';
-import { useThemeColor } from '@/hooks/useThemeColor';
+import { useEffect, useState, useContext } from 'react';
+import { View, StyleSheet, ScrollView, Pressable, Text } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { Alarm } from '@/components/Alarm';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -64,11 +62,7 @@ export default function HomeScreen() {
             <ScrollView style={styles.medicinesContainer}>
                 {medicines.map((item, index) => (
                     <Alarm key={index} data={item} />
-                {
-                        medicines.map((item, index) => (
-                            <Alarm key={index} data={item} />
-                        ))
-                    }
+                ))}
             </ScrollView>
         </View>
     );
