@@ -11,7 +11,7 @@ import PendingMedicinesContext from '@/contexts/pendingMedicines';
 import { Medicine } from '@/constants/Models';
 
 export default function HomeScreen() {
-    const [medicines, setMedicines] = useState<Medicine []>([]);
+    const [medicines, setMedicines] = useState<Medicine[]>([]);
     const { pendingMedicines, setPendingMedicines } = useContext(PendingMedicinesContext);
 
     useEffect(() => {
@@ -28,9 +28,9 @@ export default function HomeScreen() {
                 setMedicines(JSON.parse(value));
             }
         }
-  
+
         getMedicine();
-        setPendingMedicines([{"name": "Ibuprofeno", "enabled": true,"interval": 8,"dose": 1.0,"schedule": ["8:00", "16:00", "20:00"]}, {"name": "Ketorolaco", "enabled": false,"interval": 12,"dose": 1.0,"schedule": ["8:00", "16:00"]}]);
+        //setPendingMedicines([{"name": "Ibuprofeno", "enabled": true,"interval": 8,"dose": 1.0,"schedule": ["8:00", "16:00", "20:00"]}, {"name": "Ketorolaco", "enabled": false,"interval": 12,"dose": 1.0,"schedule": ["8:00", "16:00"]}]);
     }, []);
 
     return (
@@ -43,7 +43,7 @@ export default function HomeScreen() {
                 <ThemedText type="subtitle">List of alarms</ThemedText>
             </View>
             <Link
-                href={{'pathname': "/review"}}
+                href={{ 'pathname': "/review" }}
                 asChild>
                 <Pressable
                     style={{

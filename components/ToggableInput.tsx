@@ -16,31 +16,38 @@ const ToggleableInput = ({ sectionName, placeholder }: { sectionName: string, pl
             lightColor="#70BFB5"
             darkColor="#337481">
             <ThemedText type="subtitle">{sectionName}</ThemedText>
-            <Input
-                placeholder={placeholder}
-                disabled={isDisabled}
-                containerStyle={styles.input}
-            />
-            <Button
-                title={isDisabled ? "Enable" : "Disable"}
-                onPress={toggleDisabled}
-            />
+            <View style={styles.inputRow}>
+                <Input
+                    placeholder={placeholder}
+                    editable={isDisabled}
+                    containerStyle={styles.input}
+                />
+                <Button
+                    title="Edit"
+                    onPress={toggleDisabled}
+                    buttonStyle={{ backgroundColor: '#DA4C2E' }}
+                />
+            </View>
         </ThemedView>
     );
 };
 
 const styles = StyleSheet.create({
     inputContainer: {
+        padding: '5%',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        borderRadius: 25,
+        marginTop: '5%'
+    },
+    input: {
+        width: '80%',
+    },
+    inputRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 10,
-    },
-    // textContainer: {
-    //     flex: 1,
-    // },
-    input: {
-        flex: 1,
-        marginRight: 10,
+        width: '100%',
     },
 });
 

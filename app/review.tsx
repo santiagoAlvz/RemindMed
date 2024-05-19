@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { ThemedText } from '@/components/ThemedText';
 import { View, StyleSheet } from 'react-native';
+import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 import ToggleableInput from '@/components/ToggableInput';
 
 import PendingMedicinesContext from '@/contexts/pendingMedicines';
@@ -9,16 +10,16 @@ import PendingMedicinesContext from '@/contexts/pendingMedicines';
 export default function ReviewScreen() {
     const { pendingMedicines } = useContext(PendingMedicinesContext);
     return (
-        <View>
-            <View style={styles.viewContainer}>
+        <GestureHandlerRootView>
+            <ScrollView style={styles.viewContainer}>
                 <View style={styles.titleContainer}>
-                    <ThemedText type="title">Review Medicine Details</ThemedText>
+                    <ThemedText type="subtitle">Review Medicine Details</ThemedText>
                 </View>
                 <ToggleableInput sectionName="Medicine Name" placeholder="Medicine 1" />
                 <ToggleableInput sectionName="Dose Intervals" placeholder="Every 4 hours" />
                 <ToggleableInput sectionName="Dosage" placeholder="3 a day" />
-            </View>
-        </View>
+            </ScrollView>
+        </GestureHandlerRootView >
     );
 }
 
@@ -41,13 +42,5 @@ const styles = StyleSheet.create({
     detailContainer: {
         padding: '1%',
         marginTop: '5%'
-    },
-    reviewDetail: {
-        padding: '7%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        borderRadius: 25,
-        marginBottom: '5%'
     },
 });
