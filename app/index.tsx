@@ -29,7 +29,7 @@ export default function HomeScreen() {
         }
 
         getMedicine();
-        setPendingMedicines([{"name": "Ibuprofeno", "enabled": true,"interval": 8,"dose": 1.0,"schedule": ["8:00", "16:00", "20:00"]}, {"name": "Ketorolaco", "enabled": false,"interval": 12,"dose": 1.0,"schedule": ["8:00", "16:00"]}]);
+        //setPendingMedicines([{"name": "Ibuprofeno", "enabled": true,"interval": 8,"dose": 1.0,"schedule": ["8:00", "16:00", "20:00"]}, {"name": "Ketorolaco", "enabled": false,"interval": 12,"dose": 1.0,"schedule": ["8:00", "16:00"]}]);
     }, []);
 
     return (
@@ -41,11 +41,8 @@ export default function HomeScreen() {
             <View style={styles.stepContainer}>
                 <ThemedText type="subtitle">List of alarms</ThemedText>
             </View>
-            <Link href='cam'>
-            cam
-            </Link>
             <Link
-                href={{ 'pathname': "/review" }}
+                href={{ 'pathname': "/cam" }}
                 asChild>
                 <Pressable
                     style={{
