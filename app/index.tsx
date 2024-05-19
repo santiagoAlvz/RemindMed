@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, useState, createContext, useContext } from 'react';
 import { View, Switch, StyleSheet, ScrollView, Pressable, Text } from 'react-native';
 import { Button } from '@rneui/themed';
 import { useThemeColor } from '@/hooks/useThemeColor';
@@ -7,11 +7,14 @@ import { ThemedView } from '@/components/ThemedView';
 import { Alarm } from '@/components/Alarm';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Link } from "expo-router";
+import PendingMedicinesContext from '@/contexts/pendingMedicines';
 
 import { Medicine } from '@/constants/Models';
 
 export default function HomeScreen() {
-    const [medicines, setMedicines] = useState<Medicine []>([{"name": "Paracetamol", "enabled": true,"interval": 8,"dose": 1.0,"schedule": ["8:00", "16:00", "20:00"]}, {"name": "Omeprazol", "enabled": false,"interval": 12,"dose": 1.0,"schedule": ["8:00", "16:00"]}]);
+    const [medicines, setMedicines] = useState<Medicine []>([]);
+    const { pendingMedicines, setPendingMedicines } = useContext(PendingMedicinesContext);
+
     useEffect(() => {
       async function getMedicine(){
         //create two dummy records
@@ -28,6 +31,7 @@ export default function HomeScreen() {
       }
   
       getMedicine();
+      setPendingMedicines([{"name": "Juan", "enabled": true,"interval": 8,"dose": 1.0,"schedule": ["8:00", "16:00", "20:00"]}, {"name": "Omeprazol", "enabled": false,"interval": 12,"dose": 1.0,"schedule": ["8:00", "16:00"]}]);
     }, []);
 
     return (
