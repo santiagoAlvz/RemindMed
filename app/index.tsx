@@ -41,6 +41,9 @@ export default function HomeScreen() {
             <View style={styles.stepContainer}>
                 <ThemedText type="subtitle">List of alarms</ThemedText>
             </View>
+            <Link href='cam'>
+            cam
+            </Link>
             <Link
                 href={{ 'pathname': "/review" }}
                 asChild>
