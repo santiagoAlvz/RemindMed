@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { View, Switch, StyleSheet, ScrollView } from 'react-native';
+import { View, Switch, StyleSheet, ScrollView, Pressable, Text } from 'react-native';
 import { Button } from '@rneui/themed';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Alarm } from '@/components/Alarm';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Link } from "expo-router";
 
 import { Medicine } from '@/constants/Models';
 
@@ -38,18 +39,22 @@ export default function HomeScreen() {
             <View style={styles.stepContainer}>
                 <ThemedText type="subtitle">List of alarms</ThemedText>
             </View>
-            <Button
-                buttonStyle={{
+            <Link href="/review" asChild>
+                <Pressable
+                    style={{
                     backgroundColor: '#8DFF8A',
                     borderColor: 'transparent',
+                    padding: 10,
                     borderWidth: 1,
-                    borderRadius: 30,
-                }}
-                title="Add new medicine"
-                titleStyle={{ color: 'black' }}
-                // color="#8DFF8A"
-                accessibilityLabel="Click to add new medicine to your alarms."
-            />
+                    borderRadius: 30}}>
+                    <Text
+                        style={{ color: 'black', textAlign: 'center', fontSize: 18}}
+                        accessibilityLabel="Click to add new medicine to your alarms.">
+                        Add new medicine
+                    </Text>
+                </Pressable>
+            </Link>
+
             <ScrollView style={styles.medicinesContainer}>
                 { medicines.map((item, index) => (
                     <Alarm key={index} data={item}/>
