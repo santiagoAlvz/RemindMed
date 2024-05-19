@@ -54,20 +54,20 @@ export default function ReviewScreen() {
                 <ToggleableInput sectionName="Medicine Name" placeholder={currentMedicine['name']}/>
                 <ToggleableInput sectionName="Dose Intervals" placeholder={"Every "+currentMedicine['interval']+" hours"} />
                 <ToggleableInput sectionName="Dosage" placeholder={currentMedicine['dose']+" a day"} />
+                <View style={styles.buttonContainer}>
                 <Button
-                    style={styles.button}
                     onPress={addCurrentMedicine}
                     title="Add"
                     color="#841584"
                     accessibilityLabel="Add to my medicines"
                     />
                 <Button
-                    style={styles.button}
                     onPress={nextMedicine}
                     title="Discard"
                     color="#841584"
                     accessibilityLabel="Add to my medicines"
                     />
+                </View>
             </ScrollView>
 
         </GestureHandlerRootView>
@@ -89,8 +89,7 @@ const styles = StyleSheet.create({
         margin: '3%',
         marginTop: '7%',
         width: '90%',
-        display: 'flex',
-        gap: 20
+        display: 'flex'
     },
     textContainer: {
         flex: 1,
@@ -99,6 +98,9 @@ const styles = StyleSheet.create({
         padding: '1%',
         marginTop: '5%'
     },
-    button: {
+    buttonContainer: {
+        marginTop: 16,
+        display: 'flex',
+        gap: 8
     }
 });
