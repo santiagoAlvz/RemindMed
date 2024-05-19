@@ -43,7 +43,7 @@ export default function ReviewScreen() {
     }, []);
 
     return (
-        <GestureHandlerRootView>
+        <GestureHandlerRootView style={styles.mainContainer}>
             <ScrollView style={styles.viewContainer}>
                 <View style={styles.titleContainer}>
                     <ThemedText type="subtitle">Review Medicine Details</ThemedText>
@@ -51,26 +51,30 @@ export default function ReviewScreen() {
                 <ToggleableInput sectionName="Medicine Name" placeholder={currentMedicine['name']}/>
                 <ToggleableInput sectionName="Dose Intervals" placeholder={"Every "+currentMedicine['interval']+" hours"} />
                 <ToggleableInput sectionName="Dosage" placeholder={currentMedicine['dose']+" a day"} />
+                <Button
+                    style={styles.button}
+                    onPress={addCurrentMedicine}
+                    title="Add"
+                    color="#841584"
+                    accessibilityLabel="Add to my medicines"
+                    />
+                <Button
+                    style={styles.button}
+                    onPress={nextMedicine}
+                    title="Discard"
+                    color="#841584"
+                    accessibilityLabel="Add to my medicines"
+                    />
             </ScrollView>
 
-
-            <Button
-                onPress={addCurrentMedicine}
-                title="Add"
-                color="#841584"
-                accessibilityLabel="Add to my medicines"
-                />
-            <Button
-                onPress={nextMedicine}
-                title="Discard"
-                color="#841584"
-                accessibilityLabel="Add to my medicines"
-                />
         </GestureHandlerRootView>
     );
 }
 
 const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1
+    },
     titleContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -78,10 +82,12 @@ const styles = StyleSheet.create({
     },
     viewContainer: {
         flex: 1,
+        flexDirection: 'column',
         margin: '3%',
         marginTop: '7%',
-        position: 'absolute',
         width: '90%',
+        display: 'flex',
+        gap: 20
     },
     textContainer: {
         flex: 1,
@@ -90,4 +96,6 @@ const styles = StyleSheet.create({
         padding: '1%',
         marginTop: '5%'
     },
+    button: {
+    }
 });
