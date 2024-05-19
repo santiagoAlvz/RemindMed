@@ -18,7 +18,6 @@ export default function ReviewScreen() {
                 <ToggleableInput sectionName="Dose Intervals" placeholder="Every 4 hours" />
                 <ToggleableInput sectionName="Dosage" placeholder="3 a day" />
             </View>
-            <ThemedText>{JSON.stringify(pendingMedicines)}</ThemedText>
         </View>
     );
 }
