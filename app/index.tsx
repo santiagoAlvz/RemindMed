@@ -18,6 +18,7 @@ export default function HomeScreen() {
         async function getMedicine() {
             //create two dummy records
             //await AsyncStorage.setItem('medicine', JSON.stringify([{"name": "Paracetamol", "enabled": true,"interval": 8,"dose": 1.0,"schedule": ["8:00", "16:00", "20:00"]}, {"name": "Omeprazol", "enabled": false,"interval": 12,"dose": 1.0,"schedule": ["8:00", "16:00"]}]));
+            //await AsyncStorage.setItem('medicine', JSON.stringify([]));
 
             const value = await AsyncStorage.getItem('medicine');
 
