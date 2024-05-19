@@ -33,7 +33,7 @@ export default function HomeScreen() {
     }, []);
 
     return (
-        <View
+        <ScrollView
             style={styles.viewContainer}>
             <View style={styles.titleContainer}>
                 <ThemedText type="title">Alarms</ThemedText>
@@ -42,6 +42,7 @@ export default function HomeScreen() {
                 <ThemedText type="subtitle">List of alarms</ThemedText>
             </View>
             <Link
+                //href={{ 'pathname': "/review" }}
                 href={{ 'pathname': "/cam" }}
                 asChild>
                 <Pressable
@@ -60,12 +61,12 @@ export default function HomeScreen() {
                 </Pressable>
             </Link>
 
-            <ScrollView style={styles.medicinesContainer}>
+            <View style={styles.medicinesContainer}>
                 {medicines.map((item, index) => (
                     <Alarm key={index} data={item} />
                 ))}
-            </ScrollView>
-        </View>
+            </View>
+        </ScrollView>
     );
 }
 
@@ -83,7 +84,6 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: '3%',
         marginTop: '13%',
-        position: 'absolute',
         width: '90%',
     },
     medicinesContainer: {

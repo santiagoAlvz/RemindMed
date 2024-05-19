@@ -13,11 +13,12 @@ const ToggleableInput = ({ sectionName, placeholder }: { sectionName: string, pl
 
     return (
         <ThemedView style={styles.inputContainer}
-            lightColor="#70BFB5"
-            darkColor="#337481">
+            lightColor="#E0EFF5"
+            darkColor="#33741">
             <ThemedText type="subtitle">{sectionName}</ThemedText>
             <View style={styles.inputRow}>
                 <Input
+                    style={styles.input}
                     placeholder={placeholder}
                     editable={isDisabled}
                     containerStyle={styles.input}
