@@ -1,13 +1,33 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react';
 import { View, Switch, StyleSheet, ScrollView } from 'react-native';
 import { Button } from '@rneui/themed';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { Alarm } from '@/components/Alarm';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { Medicine } from '@/constants/Models';
 
 export default function HomeScreen() {
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const [medicines, setMedicines] = useState<Medicine []>([]);
+    useEffect(() => {
+      async function getMedicine(){
+        //create two dummy records
+        //await AsyncStorage.setItem('medicine', JSON.stringify([{"name": "Paracetamol", "enabled": true,"interval": 8,"dose": 1.0,"schedule": ["8:00", "16:00", "20:00"]}, {"name": "Omeprazol", "enabled": false,"interval": 12,"dose": 1.0,"schedule": ["8:00", "16:00"]}]));
+        
+        const value = await AsyncStorage.getItem('medicine');
+
+        if(value === null){
+            await AsyncStorage.setItem('medicine', JSON.stringify([]));
+            setMedicines([]);
+        } else {
+            setMedicines(JSON.parse(value));
+        }
+      }
+  
+      getMedicine();
+    }, []);
 
     return (
         <View
@@ -21,6 +41,7 @@ export default function HomeScreen() {
             <Button
                 buttonStyle={{
                     backgroundColor: '#8DFF8A',
+                    borderColor: 'transparent',
                     borderWidth: 1,
                     borderRadius: 30,
                 }}
@@ -29,27 +50,12 @@ export default function HomeScreen() {
                 // color="#8DFF8A"
                 accessibilityLabel="Click to add new medicine to your alarms."
             />
-            <ScrollView
-                style={styles.medicinesContainer}>
-                <ThemedView
-                    style={styles.medicinesAlarm}
-                    lightColor="red" // Your custom light color
-                    darkColor="blue"  // Your custom dark color
-                >
-                    <View style={styles.textContainer} >
-                        <ThemedText type="subtitle">Medicine Name</ThemedText>
-                        <ThemedText>Frecuencia</ThemedText>
-                    </View>
-                    <Switch
-                        trackColor={{ false: '#767577', true: '#81b0ff' }}
-                        thumbColor={isEnabled ? '#f4f3f4' : '#f4f3f4'}
-                        ios_backgroundColor="#3e3e3e"
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-                </ThemedView>
+            <ScrollView style={styles.medicinesContainer}>
+                { medicines.map((item, index) => (
+                    <Alarm key={index} data={item}/>
+                ))}
             </ScrollView>
-        </View >
+        </View>
     );
 }
 
