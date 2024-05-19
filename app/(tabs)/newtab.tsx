@@ -7,9 +7,10 @@ import { ThemedView } from '@/components/ThemedView';
 import { useEffect, useState } from 'react';
 import { Alarm } from '@/components/Alarm';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Medicine } from '@/constants/Models';
 
 export default function HomeScreen() {
-    const [medicines, setMedicines] = useState([{}]);
+    const [medicines, setMedicines] = useState<Medicine []>([]);
     useEffect(() => {
       async function getMedicine(){
         //await AsyncStorage.setItem('medicine', JSON.stringify([{'name': 'Paracetamol','enabled': true}, {'name': 'Omeprazol','enabled': false}]));
@@ -19,9 +20,7 @@ export default function HomeScreen() {
         if(value === null){
             await AsyncStorage.setItem('medicine', JSON.stringify([]));
             setMedicines([]);
-        }
-
-        setMedicines(JSON.parse(value));
+        } else setMedicines(JSON.parse(value));
       }
   
       getMedicine();

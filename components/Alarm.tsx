@@ -5,14 +5,18 @@ import { useEffect, useState } from 'react';
 
 import { Medicine } from '@/constants/Models';
 
-export function Alarm( data: Medicine ){
+interface AlarmProps {
+    data: Medicine;
+}
+
+export function Alarm( { data }: AlarmProps ){
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
     return (
     <ThemedView style={styles.medicinesAlarm}>
-        <ThemedText type="subtitle">{data.data['name']}</ThemedText>
-        <ThemedText>{'Cada ' + data.data['interval'] + ' horas'}</ThemedText>
+        <ThemedText type="subtitle">{data['name']}</ThemedText>
+        <ThemedText>{'Cada ' + data['interval'] + ' horas'}</ThemedText>
         <Switch
             trackColor={{ false: '#767577', true: '#81b0ff' }}
             thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
