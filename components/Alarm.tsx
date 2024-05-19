@@ -21,6 +21,7 @@ export function Alarm({ data }: AlarmProps) {
             <View style={styles.textContainer} >
                 <ThemedText type="subtitle">{data['name']}</ThemedText>
                 <ThemedText>{'Cada ' + data['interval'] + ' horas'}</ThemedText>
+                <ThemedText type="defaultSemiBold">{data['schedule'].join(', ')}</ThemedText>
             </View>
             <Switch
                 trackColor={{ false: '#7A788C', true: '#81b0ff' }}
