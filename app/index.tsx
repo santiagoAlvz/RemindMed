@@ -31,7 +31,7 @@ export default function HomeScreen() {
       }
   
       getMedicine();
-      setPendingMedicines([{"name": "Juan", "enabled": true,"interval": 8,"dose": 1.0,"schedule": ["8:00", "16:00", "20:00"]}, {"name": "Omeprazol", "enabled": false,"interval": 12,"dose": 1.0,"schedule": ["8:00", "16:00"]}]);
+      setPendingMedicines([{"name": "Ibuprofeno", "enabled": true,"interval": 8,"dose": 1.0,"schedule": ["8:00", "16:00", "20:00"]}, {"name": "Ketorolaco", "enabled": false,"interval": 12,"dose": 1.0,"schedule": ["8:00", "16:00"]}]);
     }, []);
 
     return (

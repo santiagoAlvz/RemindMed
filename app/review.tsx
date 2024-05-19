@@ -5,7 +5,7 @@ import PendingMedicinesContext from '@/contexts/pendingMedicines';
 import { useContext } from 'react';
 
 export default function ReviewScreen(){
-    const pendingMedicines = useContext(PendingMedicinesContext);
+    const { pendingMedicines } = useContext(PendingMedicinesContext);
 
     return(
         <View>
