@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import PendingMedicinesContext from '@/contexts/pendingMedicines';
 import { Medicine } from '@/constants/Models';
+import { Schedules } from '@/constants/schedules';
 import { router } from 'expo-router';
 
 export default function ReviewScreen() {
@@ -22,6 +23,8 @@ export default function ReviewScreen() {
 
         if(result !== null){
             var meds = JSON.parse(result);
+
+            currentMedicine['schedule'] = Schedules[currentMedicine['interval'].toString()];
             meds.push(currentMedicine);
 
             await AsyncStorage.setItem('medicine', JSON.stringify(meds));

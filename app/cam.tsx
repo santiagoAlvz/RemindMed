@@ -1,5 +1,4 @@
 // App.js file 
-import { API_KEY } from '@env';
 import { StatusBar } from "expo-status-bar"; 
 import { useState } from "react"; 
 import { 
