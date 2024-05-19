@@ -1,32 +1,30 @@
 import { useEffect, useState } from 'react';
 import { View, Switch, StyleSheet, ScrollView } from 'react-native';
 import { Button } from '@rneui/themed';
-import { useThemeColor } from '@/hooks/useThemeColor';
 import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 import { Alarm } from '@/components/Alarm';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Medicine } from '@/constants/Models';
 
 export default function HomeScreen() {
-    const [medicines, setMedicines] = useState<Medicine []>([]);
+    const [medicines, setMedicines] = useState<Medicine[]>([]);
     useEffect(() => {
-      async function getMedicine(){
-        //create two dummy records
-        //await AsyncStorage.setItem('medicine', JSON.stringify([{"name": "Paracetamol", "enabled": true,"interval": 8,"dose": 1.0,"schedule": ["8:00", "16:00", "20:00"]}, {"name": "Omeprazol", "enabled": false,"interval": 12,"dose": 1.0,"schedule": ["8:00", "16:00"]}]));
-        
-        const value = await AsyncStorage.getItem('medicine');
+        async function getMedicine() {
+            //create two dummy records
+            //await AsyncStorage.setItem('medicine', JSON.stringify([{ "name": "Paracetamol", "enabled": true, "interval": 8, "dose": 1.0, "schedule": ["8:00", "16:00", "20:00"] }, { "name": "Omeprazol", "enabled": false, "interval": 12, "dose": 1.0, "schedule": ["8:00", "16:00"] }]));
 
-        if(value === null){
-            await AsyncStorage.setItem('medicine', JSON.stringify([]));
-            setMedicines([]);
-        } else {
-            setMedicines(JSON.parse(value));
+            const value = await AsyncStorage.getItem('medicine');
+
+            if (value === null) {
+                await AsyncStorage.setItem('medicine', JSON.stringify([]));
+                setMedicines([]);
+            } else {
+                setMedicines(JSON.parse(value));
+            }
         }
-      }
-  
-      getMedicine();
+
+        getMedicine();
     }, []);
 
     return (
@@ -51,8 +49,8 @@ export default function HomeScreen() {
                 accessibilityLabel="Click to add new medicine to your alarms."
             />
             <ScrollView style={styles.medicinesContainer}>
-                { medicines.map((item, index) => (
-                    <Alarm key={index} data={item}/>
+                {medicines.map((item, index) => (
+                    <Alarm key={index} data={item} />
                 ))}
             </ScrollView>
         </View>
@@ -71,22 +69,14 @@ const styles = StyleSheet.create({
     },
     viewContainer: {
         flex: 1,
-        margin: 20,
-        marginTop: 45,
+        margin: '3%',
+        marginTop: '13%',
         position: 'absolute',
-        width: 350,
+        width: '90%',
     },
     medicinesContainer: {
-        padding: 10,
-        marginTop: 10
-    },
-    medicinesAlarm: {
-        backgroundColor: '#BBBBBB',
-        padding: 30,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        borderRadius: 25
+        padding: '1%',
+        marginTop: '5%'
     },
     textContainer: {
         flex: 1,
