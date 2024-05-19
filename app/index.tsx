@@ -1,14 +1,19 @@
-import { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Pressable, Text } from 'react-native';
+import { useEffect, useState, createContext, useContext } from 'react';
+import { View, Switch, StyleSheet, ScrollView, Pressable, Text } from 'react-native';
+import { Button } from '@rneui/themed';
+import { useThemeColor } from '@/hooks/useThemeColor';
 import { ThemedText } from '@/components/ThemedText';
 import { Alarm } from '@/components/Alarm';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Link } from "expo-router";
+import PendingMedicinesContext from '@/contexts/pendingMedicines';
 
 import { Medicine } from '@/constants/Models';
 
 export default function HomeScreen() {
-    const [medicines, setMedicines] = useState<Medicine[]>([]);
+    const [medicines, setMedicines] = useState<Medicine []>([]);
+    const { pendingMedicines, setPendingMedicines } = useContext(PendingMedicinesContext);
+
     useEffect(() => {
         async function getMedicine() {
             //create two dummy records
@@ -23,8 +28,9 @@ export default function HomeScreen() {
                 setMedicines(JSON.parse(value));
             }
         }
-
+  
         getMedicine();
+        setPendingMedicines([{"name": "Ibuprofeno", "enabled": true,"interval": 8,"dose": 1.0,"schedule": ["8:00", "16:00", "20:00"]}, {"name": "Ketorolaco", "enabled": false,"interval": 12,"dose": 1.0,"schedule": ["8:00", "16:00"]}]);
     }, []);
 
     return (
@@ -36,7 +42,9 @@ export default function HomeScreen() {
             <View style={styles.stepContainer}>
                 <ThemedText type="subtitle">List of alarms</ThemedText>
             </View>
-            <Link href="/review" asChild>
+            <Link
+                href={{'pathname': "/review"}}
+                asChild>
                 <Pressable
                     style={{
                         backgroundColor: '#8DFF8A',
